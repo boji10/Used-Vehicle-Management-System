@@ -1,0 +1,50 @@
+﻿@model WebApplicationFinalProjectNiraj2022.Models.vehicle_model
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>vehicle_model</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.engine_size)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.engine_size)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.number_of_doors)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.number_of_doors)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.colour)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.colour)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.vehicle_type.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.vehicle_type.name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.vehicle_model_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

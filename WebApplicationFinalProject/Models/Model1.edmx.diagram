@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a1bae222cefc4712b2b1b7653e5ca759" Name="Diagram1">
+        <EntityTypeShape EntityType="Summer2022Model.make" Width="1.5" PointX="2.875" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="Summer2022Model.vehicle" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Summer2022Model.vehicle_model" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Summer2022Model.vehicle_type" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <AssociationConnector Association="Summer2022Model.FK__vehicle__make_id__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="Summer2022Model.FK__vehicle__vehicle__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="Summer2022Model.FK__vehicle_m__vehic__5535A963" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Summer2022Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="make">
+    <Key>
+      <PropertyRef Name="make_id" />
+    </Key>
+    <Property Name="make_id" Type="Int32" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="vehicles" Relationship="Self.FK__vehicle__make_id__5812160E" FromRole="make" ToRole="vehicle" />
+  </EntityType>
+  <EntityType Name="vehicle">
+    <Key>
+      <PropertyRef Name="vehicle_id" />
+    </Key>
+    <Property Name="vehicle_id" Type="Int32" Nullable="false" />
+    <Property Name="make_id" Type="Int32" Nullable="false" />
+    <Property Name="vehicle_model_id" Type="Int32" Nullable="false" />
+    <Property Name="manufature_year" Type="Int32" />
+    <Property Name="price" Type="Double" />
+    <Property Name="cost" Type="Double" />
+    <Property Name="sold_date" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="make" Relationship="Self.FK__vehicle__make_id__5812160E" FromRole="vehicle" ToRole="make" />
+    <NavigationProperty Name="vehicle_model" Relationship="Self.FK__vehicle__vehicle__59063A47" FromRole="vehicle" ToRole="vehicle_model" />
+  </EntityType>
+  <EntityType Name="vehicle_model">
+    <Key>
+      <PropertyRef Name="vehicle_model_id" />
+    </Key>
+    <Property Name="vehicle_model_id" Type="Int32" Nullable="false" />
+    <Property Name="engine_size" Type="Double" />
+    <Property Name="number_of_doors" Type="Int32" />
+    <Property Name="colour" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="vehicle_type_id" Type="Int32" />
+    <NavigationProperty Name="vehicles" Relationship="Self.FK__vehicle__vehicle__59063A47" FromRole="vehicle_model" ToRole="vehicle" />
+    <NavigationProperty Name="vehicle_type" Relationship="Self.FK__vehicle_m__vehic__5535A963" FromRole="vehicle_model" ToRole="vehicle_type" />
+  </EntityType>
+  <EntityType Name="vehicle_type">
+    <Key>
+      <PropertyRef Name="vehicle_type_id" />
+    </Key>
+    <Property Name="vehicle_type_id" Type="Int32" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="vehicle_model" Relationship="Self.FK__vehicle_m__vehic__5535A963" FromRole="vehicle_type" ToRole="vehicle_model" />
+  </EntityType>
+  <Association Name="FK__vehicle__make_id__5812160E">
+    <End Role="make" Type="Self.make" Multiplicity="1" />
+    <End Role="vehicle" Type="Self.vehicle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="make">
+        <PropertyRef Name="make_id" />
+      </Principal>
+      <Dependent Role="vehicle">
+        <PropertyRef Name="make_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__vehicle__vehicle__59063A47">
+    <End Role="vehicle_model" Type="Self.vehicle_model" Multiplicity="1" />
+    <End Role="vehicle" Type="Self.vehicle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="vehicle_model">
+        <PropertyRef Name="vehicle_model_id" />
+      </Principal>
+      <Dependent Role="vehicle">
+        <PropertyRef Name="vehicle_model_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__vehicle_m__vehic__5535A963">
+    <End Role="vehicle_type" Type="Self.vehicle_type" Multiplicity="0..1" />
+    <End Role="vehicle_model" Type="Self.vehicle_model" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="vehicle_type">
+        <PropertyRef Name="vehicle_type_id" />
+      </Principal>
+      <Dependent Role="vehicle_model">
+        <PropertyRef Name="vehicle_type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Summer2022Entities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="makes" EntityType="Self.make" />
+    <EntitySet Name="vehicles" EntityType="Self.vehicle" />
+    <EntitySet Name="vehicle_model" EntityType="Self.vehicle_model" />
+    <EntitySet Name="vehicle_type" EntityType="Self.vehicle_type" />
+    <AssociationSet Name="FK__vehicle__make_id__5812160E" Association="Self.FK__vehicle__make_id__5812160E">
+      <End Role="make" EntitySet="makes" />
+      <End Role="vehicle" EntitySet="vehicles" />
+    </AssociationSet>
+    <AssociationSet Name="FK__vehicle__vehicle__59063A47" Association="Self.FK__vehicle__vehicle__59063A47">
+      <End Role="vehicle_model" EntitySet="vehicle_model" />
+      <End Role="vehicle" EntitySet="vehicles" />
+    </AssociationSet>
+    <AssociationSet Name="FK__vehicle_m__vehic__5535A963" Association="Self.FK__vehicle_m__vehic__5535A963">
+      <End Role="vehicle_type" EntitySet="vehicle_type" />
+      <End Role="vehicle_model" EntitySet="vehicle_model" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

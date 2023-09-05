@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Summer2022ModelStoreContainer" CdmEntityContainer="Summer2022Entities1">
+    <EntitySetMapping Name="makes">
+      <EntityTypeMapping TypeName="Summer2022Model.make">
+        <MappingFragment StoreEntitySet="make">
+          <ScalarProperty Name="make_id" ColumnName="make_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vehicles">
+      <EntityTypeMapping TypeName="Summer2022Model.vehicle">
+        <MappingFragment StoreEntitySet="vehicle">
+          <ScalarProperty Name="vehicle_id" ColumnName="vehicle_id" />
+          <ScalarProperty Name="make_id" ColumnName="make_id" />
+          <ScalarProperty Name="vehicle_model_id" ColumnName="vehicle_model_id" />
+          <ScalarProperty Name="manufature_year" ColumnName="manufature_year" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="cost" ColumnName="cost" />
+          <ScalarProperty Name="sold_date" ColumnName="sold_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vehicle_model">
+      <EntityTypeMapping TypeName="Summer2022Model.vehicle_model">
+        <MappingFragment StoreEntitySet="vehicle_model">
+          <ScalarProperty Name="vehicle_model_id" ColumnName="vehicle_model_id" />
+          <ScalarProperty Name="engine_size" ColumnName="engine_size" />
+          <ScalarProperty Name="number_of_doors" ColumnName="number_of_doors" />
+          <ScalarProperty Name="colour" ColumnName="colour" />
+          <ScalarProperty Name="vehicle_type_id" ColumnName="vehicle_type_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vehicle_type">
+      <EntityTypeMapping TypeName="Summer2022Model.vehicle_type">
+        <MappingFragment StoreEntitySet="vehicle_type">
+          <ScalarProperty Name="vehicle_type_id" ColumnName="vehicle_type_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

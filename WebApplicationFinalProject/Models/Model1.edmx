@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Summer2022Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="make">
+          <Key>
+            <PropertyRef Name="make_id" />
+          </Key>
+          <Property Name="make_id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="vehicle">
+          <Key>
+            <PropertyRef Name="vehicle_id" />
+          </Key>
+          <Property Name="vehicle_id" Type="int" Nullable="false" />
+          <Property Name="make_id" Type="int" Nullable="false" />
+          <Property Name="vehicle_model_id" Type="int" Nullable="false" />
+          <Property Name="manufature_year" Type="int" />
+          <Property Name="price" Type="float" />
+          <Property Name="cost" Type="float" />
+          <Property Name="sold_date" Type="date" />
+        </EntityType>
+        <EntityType Name="vehicle_model">
+          <Key>
+            <PropertyRef Name="vehicle_model_id" />
+          </Key>
+          <Property Name="vehicle_model_id" Type="int" Nullable="false" />
+          <Property Name="engine_size" Type="float" />
+          <Property Name="number_of_doors" Type="int" />
+          <Property Name="colour" Type="varchar" MaxLength="255" />
+          <Property Name="vehicle_type_id" Type="int" />
+        </EntityType>
+        <EntityType Name="vehicle_type">
+          <Key>
+            <PropertyRef Name="vehicle_type_id" />
+          </Key>
+          <Property Name="vehicle_type_id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <Association Name="FK__vehicle__make_id__5812160E">
+          <End Role="make" Type="Self.make" Multiplicity="1" />
+          <End Role="vehicle" Type="Self.vehicle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="make">
+              <PropertyRef Name="make_id" />
+            </Principal>
+            <Dependent Role="vehicle">
+              <PropertyRef Name="make_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__vehicle__vehicle__59063A47">
+          <End Role="vehicle_model" Type="Self.vehicle_model" Multiplicity="1" />
+          <End Role="vehicle" Type="Self.vehicle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vehicle_model">
+              <PropertyRef Name="vehicle_model_id" />
+            </Principal>
+            <Dependent Role="vehicle">
+              <PropertyRef Name="vehicle_model_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__vehicle_m__vehic__5535A963">
+          <End Role="vehicle_type" Type="Self.vehicle_type" Multiplicity="0..1" />
+          <End Role="vehicle_model" Type="Self.vehicle_model" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vehicle_type">
+              <PropertyRef Name="vehicle_type_id" />
+            </Principal>
+            <Dependent Role="vehicle_model">
+              <PropertyRef Name="vehicle_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Summer2022ModelStoreContainer">
+          <EntitySet Name="make" EntityType="Self.make" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vehicle" EntityType="Self.vehicle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vehicle_model" EntityType="Self.vehicle_model" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vehicle_type" EntityType="Self.vehicle_type" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__vehicle__make_id__5812160E" Association="Self.FK__vehicle__make_id__5812160E">
+            <End Role="make" EntitySet="make" />
+            <End Role="vehicle" EntitySet="vehicle" />
+          </AssociationSet>
+          <AssociationSet Name="FK__vehicle__vehicle__59063A47" Association="Self.FK__vehicle__vehicle__59063A47">
+            <End Role="vehicle_model" EntitySet="vehicle_model" />
+            <End Role="vehicle" EntitySet="vehicle" />
+          </AssociationSet>
+          <AssociationSet Name="FK__vehicle_m__vehic__5535A963" Association="Self.FK__vehicle_m__vehic__5535A963">
+            <End Role="vehicle_type" EntitySet="vehicle_type" />
+            <End Role="vehicle_model" EntitySet="vehicle_model" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Summer2022Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="make">
+          <Key>
+            <PropertyRef Name="make_id" />
+          </Key>
+          <Property Name="make_id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="vehicles" Relationship="Self.FK__vehicle__make_id__5812160E" FromRole="make" ToRole="vehicle" />
+        </EntityType>
+        <EntityType Name="vehicle">
+          <Key>
+            <PropertyRef Name="vehicle_id" />
+          </Key>
+          <Property Name="vehicle_id" Type="Int32" Nullable="false" />
+          <Property Name="make_id" Type="Int32" Nullable="false" />
+          <Property Name="vehicle_model_id" Type="Int32" Nullable="false" />
+          <Property Name="manufature_year" Type="Int32" />
+          <Property Name="price" Type="Double" />
+          <Property Name="cost" Type="Double" />
+          <Property Name="sold_date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="make" Relationship="Self.FK__vehicle__make_id__5812160E" FromRole="vehicle" ToRole="make" />
+          <NavigationProperty Name="vehicle_model" Relationship="Self.FK__vehicle__vehicle__59063A47" FromRole="vehicle" ToRole="vehicle_model" />
+        </EntityType>
+        <EntityType Name="vehicle_model">
+          <Key>
+            <PropertyRef Name="vehicle_model_id" />
+          </Key>
+          <Property Name="vehicle_model_id" Type="Int32" Nullable="false" />
+          <Property Name="engine_size" Type="Double" />
+          <Property Name="number_of_doors" Type="Int32" />
+          <Property Name="colour" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="vehicle_type_id" Type="Int32" />
+          <NavigationProperty Name="vehicles" Relationship="Self.FK__vehicle__vehicle__59063A47" FromRole="vehicle_model" ToRole="vehicle" />
+          <NavigationProperty Name="vehicle_type" Relationship="Self.FK__vehicle_m__vehic__5535A963" FromRole="vehicle_model" ToRole="vehicle_type" />
+        </EntityType>
+        <EntityType Name="vehicle_type">
+          <Key>
+            <PropertyRef Name="vehicle_type_id" />
+          </Key>
+          <Property Name="vehicle_type_id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="vehicle_model" Relationship="Self.FK__vehicle_m__vehic__5535A963" FromRole="vehicle_type" ToRole="vehicle_model" />
+        </EntityType>
+        <Association Name="FK__vehicle__make_id__5812160E">
+          <End Role="make" Type="Self.make" Multiplicity="1" />
+          <End Role="vehicle" Type="Self.vehicle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="make">
+              <PropertyRef Name="make_id" />
+            </Principal>
+            <Dependent Role="vehicle">
+              <PropertyRef Name="make_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__vehicle__vehicle__59063A47">
+          <End Role="vehicle_model" Type="Self.vehicle_model" Multiplicity="1" />
+          <End Role="vehicle" Type="Self.vehicle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vehicle_model">
+              <PropertyRef Name="vehicle_model_id" />
+            </Principal>
+            <Dependent Role="vehicle">
+              <PropertyRef Name="vehicle_model_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__vehicle_m__vehic__5535A963">
+          <End Role="vehicle_type" Type="Self.vehicle_type" Multiplicity="0..1" />
+          <End Role="vehicle_model" Type="Self.vehicle_model" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vehicle_type">
+              <PropertyRef Name="vehicle_type_id" />
+            </Principal>
+            <Dependent Role="vehicle_model">
+              <PropertyRef Name="vehicle_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Summer2022Entities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="makes" EntityType="Self.make" />
+          <EntitySet Name="vehicles" EntityType="Self.vehicle" />
+          <EntitySet Name="vehicle_model" EntityType="Self.vehicle_model" />
+          <EntitySet Name="vehicle_type" EntityType="Self.vehicle_type" />
+          <AssociationSet Name="FK__vehicle__make_id__5812160E" Association="Self.FK__vehicle__make_id__5812160E">
+            <End Role="make" EntitySet="makes" />
+            <End Role="vehicle" EntitySet="vehicles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__vehicle__vehicle__59063A47" Association="Self.FK__vehicle__vehicle__59063A47">
+            <End Role="vehicle_model" EntitySet="vehicle_model" />
+            <End Role="vehicle" EntitySet="vehicles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__vehicle_m__vehic__5535A963" Association="Self.FK__vehicle_m__vehic__5535A963">
+            <End Role="vehicle_type" EntitySet="vehicle_type" />
+            <End Role="vehicle_model" EntitySet="vehicle_model" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Summer2022ModelStoreContainer" CdmEntityContainer="Summer2022Entities1">
+          <EntitySetMapping Name="makes">
+            <EntityTypeMapping TypeName="Summer2022Model.make">
+              <MappingFragment StoreEntitySet="make">
+                <ScalarProperty Name="make_id" ColumnName="make_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vehicles">
+            <EntityTypeMapping TypeName="Summer2022Model.vehicle">
+              <MappingFragment StoreEntitySet="vehicle">
+                <ScalarProperty Name="vehicle_id" ColumnName="vehicle_id" />
+                <ScalarProperty Name="make_id" ColumnName="make_id" />
+                <ScalarProperty Name="vehicle_model_id" ColumnName="vehicle_model_id" />
+                <ScalarProperty Name="manufature_year" ColumnName="manufature_year" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="cost" ColumnName="cost" />
+                <ScalarProperty Name="sold_date" ColumnName="sold_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vehicle_model">
+            <EntityTypeMapping TypeName="Summer2022Model.vehicle_model">
+              <MappingFragment StoreEntitySet="vehicle_model">
+                <ScalarProperty Name="vehicle_model_id" ColumnName="vehicle_model_id" />
+                <ScalarProperty Name="engine_size" ColumnName="engine_size" />
+                <ScalarProperty Name="number_of_doors" ColumnName="number_of_doors" />
+                <ScalarProperty Name="colour" ColumnName="colour" />
+                <ScalarProperty Name="vehicle_type_id" ColumnName="vehicle_type_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vehicle_type">
+            <EntityTypeMapping TypeName="Summer2022Model.vehicle_type">
+              <MappingFragment StoreEntitySet="vehicle_type">
+                <ScalarProperty Name="vehicle_type_id" ColumnName="vehicle_type_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

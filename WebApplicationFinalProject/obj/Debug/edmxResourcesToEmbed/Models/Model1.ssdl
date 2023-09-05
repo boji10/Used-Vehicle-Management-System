@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Summer2022Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="make">
+    <Key>
+      <PropertyRef Name="make_id" />
+    </Key>
+    <Property Name="make_id" Type="int" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="vehicle">
+    <Key>
+      <PropertyRef Name="vehicle_id" />
+    </Key>
+    <Property Name="vehicle_id" Type="int" Nullable="false" />
+    <Property Name="make_id" Type="int" Nullable="false" />
+    <Property Name="vehicle_model_id" Type="int" Nullable="false" />
+    <Property Name="manufature_year" Type="int" />
+    <Property Name="price" Type="float" />
+    <Property Name="cost" Type="float" />
+    <Property Name="sold_date" Type="date" />
+  </EntityType>
+  <EntityType Name="vehicle_model">
+    <Key>
+      <PropertyRef Name="vehicle_model_id" />
+    </Key>
+    <Property Name="vehicle_model_id" Type="int" Nullable="false" />
+    <Property Name="engine_size" Type="float" />
+    <Property Name="number_of_doors" Type="int" />
+    <Property Name="colour" Type="varchar" MaxLength="255" />
+    <Property Name="vehicle_type_id" Type="int" />
+  </EntityType>
+  <EntityType Name="vehicle_type">
+    <Key>
+      <PropertyRef Name="vehicle_type_id" />
+    </Key>
+    <Property Name="vehicle_type_id" Type="int" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <Association Name="FK__vehicle__make_id__5812160E">
+    <End Role="make" Type="Self.make" Multiplicity="1" />
+    <End Role="vehicle" Type="Self.vehicle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="make">
+        <PropertyRef Name="make_id" />
+      </Principal>
+      <Dependent Role="vehicle">
+        <PropertyRef Name="make_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__vehicle__vehicle__59063A47">
+    <End Role="vehicle_model" Type="Self.vehicle_model" Multiplicity="1" />
+    <End Role="vehicle" Type="Self.vehicle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="vehicle_model">
+        <PropertyRef Name="vehicle_model_id" />
+      </Principal>
+      <Dependent Role="vehicle">
+        <PropertyRef Name="vehicle_model_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__vehicle_m__vehic__5535A963">
+    <End Role="vehicle_type" Type="Self.vehicle_type" Multiplicity="0..1" />
+    <End Role="vehicle_model" Type="Self.vehicle_model" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="vehicle_type">
+        <PropertyRef Name="vehicle_type_id" />
+      </Principal>
+      <Dependent Role="vehicle_model">
+        <PropertyRef Name="vehicle_type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Summer2022ModelStoreContainer">
+    <EntitySet Name="make" EntityType="Self.make" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="vehicle" EntityType="Self.vehicle" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="vehicle_model" EntityType="Self.vehicle_model" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="vehicle_type" EntityType="Self.vehicle_type" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__vehicle__make_id__5812160E" Association="Self.FK__vehicle__make_id__5812160E">
+      <End Role="make" EntitySet="make" />
+      <End Role="vehicle" EntitySet="vehicle" />
+    </AssociationSet>
+    <AssociationSet Name="FK__vehicle__vehicle__59063A47" Association="Self.FK__vehicle__vehicle__59063A47">
+      <End Role="vehicle_model" EntitySet="vehicle_model" />
+      <End Role="vehicle" EntitySet="vehicle" />
+    </AssociationSet>
+    <AssociationSet Name="FK__vehicle_m__vehic__5535A963" Association="Self.FK__vehicle_m__vehic__5535A963">
+      <End Role="vehicle_type" EntitySet="vehicle_type" />
+      <End Role="vehicle_model" EntitySet="vehicle_model" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
